@@ -1,0 +1,4 @@
+﻿
+- the project is upgrade to .net 7 
+- diff between SendAsync and InvokeAsync during the https://youtu.be/8g34hhmiI_Q?t=109
+- there are another branch part-1/
