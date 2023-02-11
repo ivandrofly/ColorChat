@@ -3,6 +3,7 @@ using ColorChat.WPF.Commands;
 using ColorChat.WPF.Services;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ColorChat.WPF.ViewModels
@@ -112,7 +113,13 @@ namespace ColorChat.WPF.ViewModels
 
         private void ChatService_ColorMessageReceived(ColorChatColor color)
         {
-            Messages.Add(new ColorChatColorViewModel(color));
+	        // note: for some reason `ChatService_ColorMessageReceived` is being invoked by worker-thread
+	        // this fixes the issue.
+	        // ps: another thing to consider is that this project is not upgrade to .nert 7 windows
+	        Application.Current.Dispatcher.Invoke(() =>
+	        {
+		        Messages.Add(new ColorChatColorViewModel(color));
+	        });
         }
     }
 }

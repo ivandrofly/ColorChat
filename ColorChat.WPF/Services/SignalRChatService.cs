@@ -16,7 +16,6 @@ namespace ColorChat.WPF.Services
         public SignalRChatService(HubConnection connection)
         {
             _connection = connection;
-
             _connection.On<ColorChatColor>("ReceiveColorMessage", (color) => ColorMessageReceived?.Invoke(color));
         }
 
